@@ -9,7 +9,8 @@ import java.awt.Graphics;
 public class GamePanel extends JPanel {
 
     private MouseInputs mouseInputs;
-    private int xDelta = 100, yDelta = 100;
+    private float xDelta = 100f, yDelta = 100f;
+    private float xDir = 0.003f, yDir = 0.003f;
     private int frames = 0;
     private long lastChecked = 0;
 
@@ -34,10 +35,22 @@ public class GamePanel extends JPanel {
         this.yDelta = y;
     }
 
+    public void updateRectangle() {
+        this.xDelta += xDir;
+        if(this.xDelta > 1920 || this.xDelta < 0)
+            this.xDir *= -1;
+
+        this.yDelta += yDir;
+        if(this.yDelta > 1080 || this.yDelta < 0)
+            this.yDir *= -1;
+    }
+
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        g.fillRect(xDelta, yDelta, 500, 200);
+        updateRectangle();
+
+        g.fillRect((int) xDelta, (int) yDelta, 500, 200);
 
         frames++;
 
