@@ -1,7 +1,9 @@
 package main;
 
 public class Game {
-    public Game(){
+    private GameWindow gameWindow;
 
+    public Game(){
+        gameWindow = new GameWindow();
     }
 }
