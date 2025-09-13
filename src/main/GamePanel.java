@@ -4,8 +4,7 @@ import inputs.KeyboardInputs;
 import inputs.MouseInputs;
 
 import javax.swing.JPanel;
-import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.*;
 import java.util.Random;
 
 public class GamePanel extends JPanel {
@@ -20,9 +19,15 @@ public class GamePanel extends JPanel {
         mouseInputs = new MouseInputs(this);
         random = new Random();
 
+        setPannelSize();
         addKeyListener(new KeyboardInputs(this));
         addMouseListener(mouseInputs);
         addMouseMotionListener(mouseInputs);
+    }
+
+    private void setPannelSize() {
+        Dimension screenSize = new Dimension(1280, 800);
+        setPreferredSize(screenSize);
     }
 
     public void changeXDelta(int xDelta) {
