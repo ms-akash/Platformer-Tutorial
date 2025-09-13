@@ -10,6 +10,8 @@ public class GamePanel extends JPanel {
 
     private MouseInputs mouseInputs;
     private int xDelta = 100, yDelta = 100;
+    private int frames = 0;
+    private long lastChecked = 0;
 
     public GamePanel() {
         mouseInputs = new MouseInputs(this);
@@ -21,23 +23,30 @@ public class GamePanel extends JPanel {
 
     public void changeXDelta(int xDelta) {
         this.xDelta += xDelta;
-        repaint();
     }
 
     public void changeYDelta(int yDelta) {
         this.yDelta += yDelta;
-        repaint();
     }
 
     public void changeRectPosition(int x, int y) {
         this.xDelta = x;
         this.yDelta = y;
-        repaint();
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
         g.fillRect(xDelta, yDelta, 500, 200);
+
+        frames++;
+
+        if (System.currentTimeMillis() - lastChecked > 1000) {
+            lastChecked = System.currentTimeMillis();
+            System.out.println("FPS: " + frames);
+            frames = 0;
+        }
+
+        repaint();
     }
 }
